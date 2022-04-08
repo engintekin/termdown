@@ -1,0 +1,27 @@
+session_name: have fun!
+start_directory: ./ # load session relative to config location (project root).
+shell_command_before:
+- '[ -f .venv/bin/activate ] && source .venv/bin/activate && reset'
+windows:
+- window_name: myday
+  focus: True
+  layout: main-vertical
+  options:
+    main-pane-width: 400
+  start_directory: ~/projects/
+  panes:
+  - shell_command:
+    - echo "Have fun!"
+  - shell_command:   
+    - cd ~/projects/termdown
+    - python termdown.py 3 -f moscow -v Anna
+    focus: true
+  - vim fun/fun.md
+- window_name: tmuxp
+  layout: main-horizontal
+  options:
+    main-pane-height: 35
+  panes:
+  - focus: true
+  - pane
+  - make watch_test
