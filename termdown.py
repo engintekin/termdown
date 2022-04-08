@@ -372,14 +372,8 @@ def countdown(
                     except CharNotPrinted:
                         draw_text(stdscr, "E")
             annunciation = None
-            if seconds_left <= critical:
+            if seconds_left % 300 == 0:
                 annunciation = str(seconds_left)
-            elif seconds_left in (5, 10, 20, 30, 60):
-                annunciation = "{} {} seconds".format(voice_prefix, seconds_left)
-            elif seconds_left in (300, 600, 1800):
-                annunciation = "{} {} minutes".format(voice_prefix, int(seconds_left / 60))
-            elif seconds_left == 3600:
-                annunciation = "{} one hour".format(voice_prefix)
             if annunciation or exec_cmd:
                 if exec_cmd:
                     Popen(
@@ -390,6 +384,7 @@ def countdown(
                     )
 
                 if voice_cmd:
+                    annunciation = "focus focus!"
                     Popen(
                         [voice_cmd, "-v", voice, annunciation.strip()],
                         stdout=DEVNULL,
